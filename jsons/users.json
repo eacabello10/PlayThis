@@ -1,0 +1,74 @@
+{
+    "id": 123,
+    "name": "Eduardo",
+    "profile_img": "urlImage",
+    "biography": "bio",
+    "friendList": [
+        {
+            "name": "Jairo"
+        }
+    ],
+    "games_played": [
+        {
+            "name": "Bloodborne",
+            "launchdate": "fecha",
+            "exclusive": true,
+            "genre": [
+                "action",
+                "rol"
+            ],
+            "aproxDuration": 70,
+            "multiplayer": false
+        }
+    ],
+    "currently_played": [
+        {
+            "name": "Metroid: Samus Returns",
+            "launchdate": "fecha",
+            "exclusive": true,
+            "genre": [
+                "action",
+                "metroidvania",
+                "sidescrolling"
+            ],
+            "aproxDuration": 70,
+            "multiplayer": false
+        }
+    ],
+    "finished": [
+        {
+            "name": "Minecraft",
+            "launchdate": "fecha",
+            "exclusive": false,
+            "genre": [
+                "maincra"
+            ],
+            "aproxDuration": 70,
+            "multiplayer": false
+        }
+    ],
+    "droped": [
+        {
+            "name": "League of Legend",
+            "launchdate": "fecha",
+            "exclusive": true,
+            "genre": [
+                "MOBA"
+            ],
+            "aproxDuration": "too much to be true",
+            "multiplayer": true
+        }
+    ],
+    "never": [
+        {
+            "name": "E.T for SNES",
+            "launchdate": "fecha",
+            "exclusive": true,
+            "genre": [
+                "Adventure"
+            ],
+            "aproxDuration": "10",
+            "multiplayer": false
+        }
+    ]
+}
