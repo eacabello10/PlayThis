@@ -5,6 +5,17 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var mongodb = require("mongodb");
+mongodb.connect(url, (err,db) => {
+  if (err) console.error(err);
+  console.log("success");
+});
+
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
+
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -42,5 +53,13 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.use(require('express-session')({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 module.exports = app;
