@@ -1,0 +1,38 @@
+[
+    {
+        "id" : 1,
+        "name": "Bloodborne",
+        "launchdate": "fecha",
+        "exclusive": true,
+        "genre": [
+            "action",
+            "rol"
+        ],
+        "aproxDuration": 70,
+        "multiplayer": false
+    },
+    {
+        "id" : 2,
+        "name": "Metroid: Samus Returns",
+        "launchdate": "fecha",
+        "exclusive": true,
+        "genre": [
+            "action",
+            "metroidvania",
+            "sidescrolling"
+        ],
+        "aproxDuration": 70,
+        "multiplayer": false
+    },
+    {
+        "id" : 3,
+        "name": "Minecraft",
+        "launchdate": "fecha",
+        "exclusive": false,
+        "genre": [
+            "maincra"
+        ],
+        "aproxDuration": 70,
+        "multiplayer": false
+    }
+]
