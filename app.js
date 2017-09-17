@@ -15,9 +15,16 @@ mongodb.connect(url, (err,db) => {
 });
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+var users = require('./routes/users'); 
+var games = require('./routes/games');
+var consoles = require('./routes/consoles');
 
 var app = express();
+
+
+
+//connection to database
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -46,6 +53,8 @@ app.use((req, res, next) => {
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/games', games);
+app.use('/consoles', consoles);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
