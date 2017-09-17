@@ -3,7 +3,7 @@ var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/play-this-db';
 
-router.get('/', getRequest(req,res,next));
+router.get('/', getRequest);
 
 function getRequest(req, res, next) {
 	getInfoGames((info) => {
