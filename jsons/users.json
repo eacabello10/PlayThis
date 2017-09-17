@@ -2,6 +2,7 @@
     {
         "id": 123,
         "name": "Eduardo",
+        "username" : "edoplis",
         "profile_img": "urlImage",
         "biography": "bio",
         "friendList": [

@@ -4,17 +4,15 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var jsonwebtoken = require("jsonwebtoken");
+
+var url = "mongodb://localhost:27017/play-this-db";
 
 var mongodb = require("mongodb");
 mongodb.connect(url, (err,db) => {
   if (err) console.error(err);
   console.log("success");
 });
-
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-
-
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -32,6 +30,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use((req, res, next) => {
+  if(req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === "JWT"){
+    jsonwebtoken.verify(req.headers.authorization.split(" ")[1], "RESTFULAPIs", (err, decode) => {
+      if (err) req.user = undefined;
+      req.user = decode;
+      next();
+    });
+  } else {
+    req.user = undefined;
+    next();
+  }
+});
 
 app.use('/', index);
 app.use('/users', users);
@@ -53,13 +64,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-app.use(require('express-session')({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false
-}));
-app.use(passport.initialize());
-app.use(passport.session());
 
 module.exports = app;
