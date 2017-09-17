@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://localhost:27017/play-this-db';
+var url = process.env.MONGODB;
 
 router.get('/', getRequest);
 
