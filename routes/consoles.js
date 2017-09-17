@@ -3,7 +3,7 @@ var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/play-this-db';
 
-router.get('/consoles', function(req, res, next) {
+router.get('/', function(req, res, next) {
 	getInfoConsoles((info) => {
 		res.render('consoles', { title: 'Consoles',
   		id: info[0].id,
@@ -23,3 +23,5 @@ function getInfoConsoles(callback){
   		});
 	});
 }
+
+module.exports = router;
