@@ -2,7 +2,7 @@
     {
         "id" : 1,
         "name": "Play station 4",
-        "alises": [
+        "aliases": [
             "ps4",
             "play4",
             "pley4"
@@ -25,7 +25,7 @@
     {
         "id" : 2,
         "name": "Nintendo 3DS",
-        "alisases": [
+        "aliases": [
             "3ds",
             "n3ds"
         ],
@@ -48,7 +48,7 @@
     {
         "id" : 3,
         "name": "PC",
-        "alisases": [
+        "aliases": [
             "MASTER RACE"
         ],
         "games": [

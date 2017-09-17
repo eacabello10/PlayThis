@@ -3,25 +3,23 @@ var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/play-this-db';
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-	getInfo((info) => {
-		res.render('index', { title: 'Express',
+	getInfoGames((info) => {
+		res.render('games', { title: 'Games',
   		id: info[0].id,
   		name: info[0].name,
-  		bio: info[0].biography
+  		launchdate: info[0].launchdate
 		}
 		);
 	console.log(info);
 	});  
 });
 
-
-function getInfo(callback){
+function getInfoGames(callback){
 	MongoClient.connect(url, function(err, db){
-  		var users = db.collection("usersCollection");
-  		users.find({id:123}).toArray((err2, users) =>{
-  		callback(users);
+  		var games = db.collection("gamesCollection");
+  		games.find({}).toArray((err2, games) =>{
+  		callback(games);
   		});
 	});
 }
