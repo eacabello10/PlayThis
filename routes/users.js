@@ -13,7 +13,6 @@ router.post("/user/", loginRequired, hello)
 
 function register(req, res){
   var newUser = req.body;
-  console.log(newUser);
   newUser.password = bcrypt.hashSync(newUser.password, 10);
   mongodb.connect(url, (err, db) => {
     db.collection("usersCollection").find({"username" : newUser.username}).toArray((anError, userDocs) => {
@@ -36,7 +35,6 @@ function register(req, res){
 }
 
 function login(req, res) {
-  console.log(req.body.password);
   var userLogin = req.body;
   var password = userLogin.password;
   var username = userLogin.username
@@ -46,7 +44,6 @@ function login(req, res) {
         db.close();
         return res.status(401).json({ message: 'Authentication failed. User not found.' });
       } else {
-        console.log(userDocs);
         if(!comparePassword(password, userDocs[0].password)){
           db.close();
           return res.status(401).json({ message: 'Authentication failed. Wrong password.' });

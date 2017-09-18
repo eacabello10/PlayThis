@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://localhost:27017/play-this-db';
+var url = 'mongodb://edotest:edotest@ds036967.mlab.com:36967/playthis-db';
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', getRequest);
+
+function getRequest(req, res, next) {
 	getInfo((info) => {
 		res.render('index', { title: 'Express',
   		id: info[0].id,
@@ -12,10 +14,8 @@ router.get('/', function(req, res, next) {
   		bio: info[0].biography
 		}
 		);
-	console.log(info);
 	});  
-});
-
+}
 
 function getInfo(callback){
 	MongoClient.connect(url, function(err, db){
