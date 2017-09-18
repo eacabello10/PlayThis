@@ -58,6 +58,10 @@ a:hover {
   background: #179b77;
   color: #ffffff;
 }
+.tab-group .active a {
+  background: #1ab188;
+  color: #ffffff;
+}
 
 h1 {
   text-align: center;
@@ -136,7 +140,6 @@ textarea {
   width: 48%;
   margin-right: 4%;
 }
-
 .top-row > div:last-child {
   margin: 0;
 }
@@ -163,4 +166,9 @@ textarea {
 .button-block {
   display: block;
   width: 100%;
+}
+
+.forgot {
+  margin-top: -20px;
+  text-align: right;
 }
