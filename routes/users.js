@@ -16,10 +16,10 @@ function register(req, res){
   console.log(newUser);
   newUser.password = bcrypt.hashSync(newUser.password, 10);
   mongodb.connect(url, (err, db) => {
-    db.collection("users").find({"username" : newUser.username}).toArray((anError, userDocs) => {
+    db.collection("usersCollection").find({"username" : newUser.username}).toArray((anError, userDocs) => {
       console.log(userDocs);
       if(userDocs.lenght == 0){
-        db.collection("users").insertOne(newUser, (dbError, dbRes) =>{
+        db.collection("usersCollection").insertOne(newUser, (dbError, dbRes) =>{
           db.close();
           //res.redirect(to?);
           newUser.password = undefined;
@@ -38,7 +38,7 @@ function register(req, res){
 function login(req, res) {
   var userLogin = req.body;
   mongodb.connect(url, (err, db) => {
-    db.collection("users").find({"username" : userLogin.username}).limit(1).toArray((anError, userDocs) => {
+    db.collection("usersCollection").find({"username" : userLogin.username}).limit(1).toArray((anError, userDocs) => {
       if(userDocs.lenght == 0){
         db.close();
         res.status(401).json({ message: 'Authentication failed. User not found.' });

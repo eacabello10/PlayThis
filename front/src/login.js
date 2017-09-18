@@ -20,7 +20,7 @@ class Login extends Component {
     onSubmitEvent(evt){
         this.props.login(evt.target.value);
         fetch("/users/auth/login", {
-            method: "GET", headers : {
+            method: "POST", headers : {
               accept : "application/json"
             }
           }).then((res)=>{

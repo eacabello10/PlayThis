@@ -14,13 +14,14 @@ class App extends Component {
   }
 
   showLogin(event){
+    event.preventDefault();
     if(this.state.showSignup !== false){
       this.setState({showSignup : false});
     }
   }
 
   showSignup(event){
-    console.log(event);
+    event.preventDefault();
     if(this.state.showSignup === false){
       this.setState({showSignup : true});
     }
