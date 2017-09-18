@@ -11,15 +11,12 @@ import PropTypes from "prop-types";
 			<div className="id">Game ID: {this.props.game.id}</div>
 			<div className="name">Name: {this.props.game.name}</div>
 			<div className="launchdate">Launch Date: {this.props.game.launchdate}</div>
-			if({this.props.game.exclusive}){
-			<div className="exclusive">It's exclusive?: Yes</div>
-			}
-			else{
-			<div className="exclusive">It's exclusive?: No</div>
-			}
+			{this.props.game.exclusive === true && <div className="exclusive">It's exclusive?: Yes</div>}
+			{this.props.game.exclusive === false && <div className="exclusive">It's exclusive?: No</div>}
 			<div className="genre">Genre: {this.props.game.genre}</div>
 			<div className="aproxDuration">Aprox. Duration: {this.props.game.aproxDuration}</div>
-			<div className="multiplayer">Multiplayer: {this.props.game.multiplayer}</div>
+			{this.props.game.multiplayer === true && <div className="multiplayer">Multiplayer: Yes</div>}
+			{this.props.game.multiplayer === false && <div className="multiplayer">Multiplayer: No</div>}
 			</div>);
 			}
 }
