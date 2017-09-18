@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var cors = require('cors');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var jsonwebtoken = require("jsonwebtoken");
@@ -20,7 +21,7 @@ var consoles = require('./routes/consoles');
 
 var app = express();
 
-
+app.use(cors());
 
 //connection to database
 
