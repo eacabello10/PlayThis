@@ -26,40 +26,44 @@ class Login extends Component {
         const name = target.name;
     
         this.setState({
-          [name]: value
+            [name]: value
         });
-      }
+    }
 
-      handleChange(event) {
+    handleChange(event) {
         this.setState({bio: event.target.value});
-      }
+    }
 
-      onSubmitEvent(){
+    onSubmitEvent(){
+        if(this.state.password === this.state.confirm){
         fetch("/users/auth/signup", {
             method: "POST", headers : {
-              accept : "application/json",
-              "Content-Type" : "application/json"
+            accept : "application/json",
+            "Content-Type" : "application/json"
             }, body : JSON.stringify({
                 username : this.state.usuario,
                 password : this.state.password,
                 bio : this.state.bio,
                 name : this.state.name
             })
-          }).then((res)=>{
+        }).then((res)=>{
             console.log(res);
             if (res.ok){
-              return res.json();
+                return res.json();
             }
-          }).then((tweetsNuevos) => {
+        }).then((tweetsNuevos) => {
             
         });
+        } else {
+
+        }
     }
-      
+
     renderLogin(){            
         return (<div className="tab-content">
             <div id="signup">   
                 <h1>Sign Up for Free</h1>    
-                <form action="/" method="post">
+                <form onSubmit={this.onSubmitEvent}>
                     <div className="top-row">
                         <div className="field-wrap">
                             <label>
