@@ -8,7 +8,7 @@ var jsonwebtoken = require("jsonwebtoken");
 
 console.log(process.env.MONGODB)
 var mongodb = require("mongodb");
-mongodb.MongoClient.connect(process.env.MONGODB, (err,db) => {
+mongodb.MongoClient.connect("mongodb://jairotest:jairotest@ds036967.mlab.com:36967/playthis-db", (err,db) => {
   if (err) console.error(err);
   console.log("success");
 });
