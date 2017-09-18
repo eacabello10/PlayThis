@@ -1,21 +1,38 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
+import  GamesList from "./GamesList.js";
 class App extends Component {
-  render() {
+ 
+  constructor(props){
+    super(props);
+    this.state={
+      games: [
+      ]
+    };
+  } 
+
+  componentDidMount() {
+    fetch("/games", {method:"GET", 
+      headers:{accept:"application/json"}})
+    .then((res) => {
+      if(res.ok)
+        return res.json();
+    })
+    .then((newGames) => {
+      this.setState({
+        games: newGames
+      });
+    });
+  }
+
+  render(){
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+      <div>
+      <h1>Games</h1>
+      <GamesList games={this.state.games}/>
+      </div>);
   }
 }
+
 
 export default App;

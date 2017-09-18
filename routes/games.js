@@ -1,28 +1,28 @@
 var express = require('express');
 var router = express.Router();
-var MongoClient = require('mongodb').MongoClient;
+var mongodb = require('mongodb');
 var url = 'mongodb://edotest:edotest@ds036967.mlab.com:36967/playthis-db';
 
-router.get('/', getRequest);
+function getGames(callback){
+	mongodb.connect(url, (err,db) => {
+	if(err) throw err;
 
-function getRequest(req, res, next) {
-	getInfoGames((info) => {
-		res.render('games', { title: 'Games',
-  		id: info[0].id,
-  		name: info[0].name,
-  		launchdate: info[0].launchdate
-		}
-		);
-	});  
-}
+	var games = db.collection("gamesCollection");
 
-function getInfoGames(callback){
-	MongoClient.connect(url, function(err, db){
-  		var games = db.collection("gamesCollection");
-  		games.find({}).toArray((err2, games) =>{
-  		callback(games);
-  		});
+	games.find({}).toArray((err2, games) => {
+		if(err2) throw err2;
+
+		callback(games);
+		});
 	});
 }
+
+router.get('/', function(req, res) {
+	getGames((games) => {
+		res.json(games);
+	});
+});
+
+
 
 module.exports = router;
