@@ -18,7 +18,7 @@ function register(req, res){
   mongodb.connect(url, (err, db) => {
     db.collection("usersCollection").find({"username" : newUser.username}).toArray((anError, userDocs) => {
       console.log(userDocs);
-      if(userDocs.lenght == 0){
+      if(userDocs.length === 0){
         db.collection("usersCollection").insertOne(newUser, (dbError, dbRes) =>{
           db.close();
           //res.redirect(to?);
@@ -36,19 +36,23 @@ function register(req, res){
 }
 
 function login(req, res) {
+  console.log(req.body.password);
   var userLogin = req.body;
+  var password = userLogin.password;
+  var username = userLogin.username
   mongodb.connect(url, (err, db) => {
-    db.collection("usersCollection").find({"username" : userLogin.username}).limit(1).toArray((anError, userDocs) => {
-      if(userDocs.lenght == 0){
+    db.collection("usersCollection").find({"username" : username}).limit(2).toArray((anError, userDocs) => {
+      if(userDocs.length === 0){
         db.close();
-        res.status(401).json({ message: 'Authentication failed. User not found.' });
+        return res.status(401).json({ message: 'Authentication failed. User not found.' });
       } else {
-        if(!comparePassword(userLogin.password, userDocs[0].password)){
+        console.log(userDocs);
+        if(!comparePassword(password, userDocs[0].password)){
           db.close();
-          res.status(401).json({ message: 'Authentication failed. Wrong password.' });
+          return res.status(401).json({ message: 'Authentication failed. Wrong password.' });
         } else {
           db.close();
-          return res.json({token: jwt.sign({ email: userLogin.email, fullName: userLogin.fullName, _id: userLogin._id}, 'RESTFULAPIs')});
+          return res.json({token: jwt.sign({ email: userDocs[0].username, _id: userDocs[0]._id}, 'RESTFULAPIs')});
         }
       }
     });

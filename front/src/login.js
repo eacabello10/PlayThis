@@ -17,21 +17,32 @@ class Login extends Component {
         </div> );
     }
 
-    onSubmitEvent(evt){
-        this.props.login(evt.target.value);
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+    
+        this.setState({
+          [name]: value
+        });
+      }
+
+    onSubmitEvent(){
         fetch("/users/auth/login", {
             method: "POST", headers : {
-              accept : "application/json"
-            }
+              accept : "application/json",
+              "Content-Type" : "application/json"
+            }, body : JSON.stringify({
+                username : this.state.usuario,
+                password : this.state.password 
+            })
           }).then((res)=>{
-              console.log(res);
+            console.log(res);
             if (res.ok){
               return res.json();
             }
           }).then((tweetsNuevos) => {
-            this.setState({
-              tweets : tweetsNuevos
-            });
+            
         });
     }
 
@@ -45,13 +56,13 @@ class Login extends Component {
                             <label>
                                 Username<span className="req">*</span>
                             </label>
-                            <input type="text"required autoComplete="off"/>
+                            <input type="text"required autoComplete="off" name="usuario" onChange={this.handleInputChange.bind(this)}/>
                         </div>
                         <div className="field-wrap">
                             <label>
                                 Password<span className="req">*</span>
                             </label>
-                            <input type="password"required autoComplete="off"/>
+                            <input type="password"required autoComplete="off" name="password" onChange={this.handleInputChange.bind(this)}/>
                         </div>
                         <button className="button button-block">Log In</button>
                     </form>
