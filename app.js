@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var jsonwebtoken = require("jsonwebtoken");
 
-var url = "mongodb://localhost:27017/play-this-db";
+var url = "mongodb://edotest:edotest@ds036967.mlab.com:36967/playthis-db";
 
 var mongodb = require("mongodb");
 mongodb.connect(url, (err,db) => {

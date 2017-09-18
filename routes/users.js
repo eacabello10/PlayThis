@@ -4,7 +4,7 @@ var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var mongodb = require('mongodb');
 
-var url = "mongodb://localhost:27017/play-this-db";
+var url = "mongodb://edotest:edotest@ds036967.mlab.com:36967/playthis-db";
 
 /* GET users listing. */
 router.post('/auth/signup', register);

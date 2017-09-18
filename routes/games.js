@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://localhost:27017/play-this-db';
+var url = 'mongodb://edotest:edotest@ds036967.mlab.com:36967/playthis-db';
 
 router.get('/', getRequest);
 
@@ -13,7 +13,6 @@ function getRequest(req, res, next) {
   		launchdate: info[0].launchdate
 		}
 		);
-	console.log(info);
 	});  
 }
 
