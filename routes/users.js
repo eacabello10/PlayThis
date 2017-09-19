@@ -4,7 +4,7 @@ var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var mongodb = require('mongodb');
 
-var url = "mongodb://edotest:edotest@ds036967.mlab.com:36967/playthis-db";
+var url = "mongodb://jairotest:jairotest@ds036967.mlab.com:36967/playthis-db";
 
 /* GET users listing. */
 router.post('/auth/signup', register);
@@ -13,13 +13,12 @@ router.post("/user/", loginRequired, hello)
 
 function register(req, res){
   var newUser = req.body;
-  console.log(newUser);
   newUser.password = bcrypt.hashSync(newUser.password, 10);
   mongodb.connect(url, (err, db) => {
-    db.collection("users").find({"username" : newUser.username}).toArray((anError, userDocs) => {
+    db.collection("usersCollection").find({"username" : newUser.username}).toArray((anError, userDocs) => {
       console.log(userDocs);
-      if(userDocs.lenght == 0){
-        db.collection("users").insertOne(newUser, (dbError, dbRes) =>{
+      if(userDocs.length === 0){
+        db.collection("usersCollection").insertOne(newUser, (dbError, dbRes) =>{
           db.close();
           //res.redirect(to?);
           newUser.password = undefined;
@@ -37,18 +36,20 @@ function register(req, res){
 
 function login(req, res) {
   var userLogin = req.body;
+  var password = userLogin.password;
+  var username = userLogin.username
   mongodb.connect(url, (err, db) => {
-    db.collection("users").find({"username" : userLogin.username}).limit(1).toArray((anError, userDocs) => {
-      if(userDocs.lenght == 0){
+    db.collection("usersCollection").find({"username" : username}).limit(2).toArray((anError, userDocs) => {
+      if(userDocs.length === 0){
         db.close();
-        res.status(401).json({ message: 'Authentication failed. User not found.' });
+        return res.status(401).json({ message: 'Authentication failed. User not found.' });
       } else {
-        if(!comparePassword(userLogin.password, userDocs[0].password)){
+        if(!comparePassword(password, userDocs[0].password)){
           db.close();
-          res.status(401).json({ message: 'Authentication failed. Wrong password.' });
+          return res.status(401).json({ message: 'Authentication failed. Wrong password.' });
         } else {
           db.close();
-          return res.json({token: jwt.sign({ email: userLogin.email, fullName: userLogin.fullName, _id: userLogin._id}, 'RESTFULAPIs')});
+          return res.json({token: jwt.sign({ email: userDocs[0].username, _id: userDocs[0]._id}, 'RESTFULAPIs')});
         }
       }
     });

@@ -2,14 +2,13 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var cors = require('cors');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var jsonwebtoken = require("jsonwebtoken");
 
-var url = "mongodb://edotest:edotest@ds036967.mlab.com:36967/playthis-db";
-
 var mongodb = require("mongodb");
-mongodb.connect(url, (err,db) => {
+mongodb.MongoClient.connect("mongodb://jairotest:jairotest@ds036967.mlab.com:36967/playthis-db", (err,db) => {
   if (err) console.error(err);
   console.log("success");
 });
@@ -21,7 +20,7 @@ var consoles = require('./routes/consoles');
 
 var app = express();
 
-
+app.use(cors());
 
 //connection to database
 
