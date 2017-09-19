@@ -1,11 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
-<<<<<<< HEAD
-var url = process.env.MONGODB;
-=======
 var url = 'mongodb://edotest:edotest@ds036967.mlab.com:36967/playthis-db';
->>>>>>> master
 
 router.get('/', getRequest);
 
