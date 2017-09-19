@@ -5,7 +5,7 @@ var url = 'mongodb://edotest:edotest@ds036967.mlab.com:36967/playthis-db';
 
 /* GET home page. */
 router.get('/', getRequest);
-
+//El codigo es modular, esta bien organizado
 function getRequest(req, res, next) {
 	getInfo((info) => {
 		res.render('index', { title: 'Express',
