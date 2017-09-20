@@ -38,7 +38,6 @@ class Login extends Component {
         if(this.state.password === this.state.confirm){
             fetch("/users/auth/signup", {
                 method: "post", headers : {
-                accept : "application/json",
                 "Content-Type" : "application/json"
                 }, body : JSON.stringify({
                     username : this.state.usuario,

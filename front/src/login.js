@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 import propTypes from "prop-types";
 import "./login.css";
 
@@ -28,6 +29,17 @@ class Login extends Component {
       }
 
     onSubmitEvent(){
+        Axios.post("/users/auth/login", {
+            username : this.state.usuario,
+            password : this.state.password
+        }, {
+            'Content-Type': 'application/json',
+            'accept' : 'aplication/json',
+            'Authorization': 'JWT fefege...' 
+        }).then((response) => {
+            console.log(response);
+            return response;
+        }).then();
         fetch("/users/auth/login", {
             method: "POST", headers : {
               accept : "application/json",
